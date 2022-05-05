@@ -13,9 +13,8 @@ import random
 from faker import Faker
 
 
-
 # Create your views here.
-
+# Helps to generate fake items on the database
 def faker_data(request):
     fake = Faker()
     category = Category.objects.all()
@@ -31,12 +30,13 @@ def faker_data(request):
 
     return redirect('core:home')
 
+# Home page view
 def home(request):
     items = Item.objects.all()
     if request.method == 'POST':
         print(request.POST.get('cat'),'hello')
         
-        
+        # Gets items base on search text and category.
         if request.POST.get('cat') == "":
             items = Item.objects.filter(title__contains=request.POST.get('search'))
             
@@ -49,6 +49,8 @@ def home(request):
 
     items_count = items.count()
 
+
+    # Pagination of items (Max of 100 per page)
     page = request.GET.get('page', 1)
 
     paginator = Paginator(items, 100)
@@ -67,57 +69,12 @@ def home(request):
     return render(request, 'core/home.html', context)
 
 
-def store(request, pk=None,pk2=None, pk3= None ):
-
-    items = Item.objects.all()
-
-    if pk:
-
-        cat_id = get_object_or_404(Category, pk=pk)
-        items = Item.objects.filter(category__category = cat_id)
-
-    if pk2:
-
-        cat_id = get_object_or_404(SubCategory, pk=pk2)
-
-        items = Item.objects.filter(category__sub = cat_id)
-
-    if pk3:
-
-        cat_id = get_object_or_404(SubCategory2, pk=pk3)
-        items = Item.objects.filter(category=cat_id)
-
-    if request.method == 'POST':
-        print(request.POST.get('search'))
-        items = Item.objects.filter(title__contains=request.POST.get('search'))
-
-    if pk==0:
-        items = Item.objects.filter(new = True)
-
-    items_count = items.count()
-
-    page = request.GET.get('page', 1)
-
-    paginator = Paginator(items, 2)
-    try:
-        items = paginator.page(page)
-    except PageNotAnInteger:
-        items = paginator.page(1)
-    except EmptyPage:
-        items = paginator.page(paginator.num_pages)
-
-    category = Category.objects.all()
-
-    context = {"category": category,
-            "items": items, "items_count": items_count,'store':'active'}
-
-    return render(request, 'core/store.html', context)
-
-
+# Retrieves details of a product or Item
 def product_details(request, pk):
     item = get_object_or_404(Item, pk=pk)
     context = {}
 
+    # check if user is authenticated and gets a list of thier current order items
     if request.user.is_authenticated:
 
         try:
@@ -136,26 +93,17 @@ def product_details(request, pk):
     return render(request, 'core/detail_page.html', context)
 
 
-
+# Function handle the adding to cart(Existing or new order)
 @login_required
 def add_to_cart(request, pk):
     item = get_object_or_404(Item, pk=pk)
-    if request.method == 'POST':
 
-        print(request.POST.get('select'))
-        print("hello")
-        if request.POST.get('select'):
-            order_item, created = OrderItem.objects.get_or_create(item=item, user = request.user,ordered=False,size=request.POST.get('select'))
-
-        else:
-            order_item, created = OrderItem.objects.get_or_create(item=item, user = request.user,ordered=False)
-    else:
-        order_item, created = OrderItem.objects.get_or_create(item=item, user = request.user,ordered=False)
+    order_item, created = OrderItem.objects.get_or_create(item=item, user = request.user,ordered=False)
 
     order_qs = Order.objects.filter(user=request.user, ordered=False)
     if order_qs.exists():
         order = order_qs[0]
-        #check if the order item is in the order
+        #check if the order item is in the order so i just increases the quatity
         if order.items.filter(item__pk=item.pk).exists():
             order_item.quantity += 1
             order_item.save()
@@ -172,7 +120,7 @@ def add_to_cart(request, pk):
         messages.info(request, f'This item was added to cart.')
     return redirect('core:product_details' ,pk=pk)
 
-
+# Function handle change in quantity of an item in the cart(Existing order)
 @login_required
 def remove_single_item_from_cart(request, pk):
     item = get_object_or_404(Item, pk=pk)
@@ -202,6 +150,7 @@ def remove_single_item_from_cart(request, pk):
         return redirect('core:home')
 
 
+# Function handles removing of an item in the cart (Existing order)
 @login_required
 def remove_from_cart(request, pk):
     item = get_object_or_404(Item, pk=pk)
@@ -227,38 +176,9 @@ def remove_from_cart(request, pk):
         messages.info(request, f'You do not have an active order.')
         return redirect('core:home')
 
-
+# Handles cart checkout
 @login_required
 def checkout(request):
-    if request.method == "POST":
-
-        order = get_object_or_404(Order, pk=request.POST.get('id'))
-
-
-        order_items = order.items.all()
-        order_items.update(ordered=True)
-        for item in order_items:
-            item.save()
-
-        order.ordered = True
-
-        order.ref_code = request.POST.get('ref_code')
-        order.complete_date = timezone.now()
-        order.save()
-
-        all_orders = order.items.all()
-
-        for order_item in all_orders:
-            item = order_item.item
-            item.quantity = item.quantity - order_item.quantity
-            item.save()
-
-    
-        messages.info(request, f'Order completed')
-
-        
-
-        return redirect('core:home')
     try:
         order = Order.objects.get(user=request.user, ordered=False)
         order_items = order.items
@@ -272,7 +192,7 @@ def checkout(request):
 
     return render(request, 'core/checkout.html', context)
 
-
+#Handle completing the order and clearing cart.
 @login_required
 def payment(request,pk):
 
@@ -283,7 +203,8 @@ def payment(request,pk):
     if order_items.count() <= 0:
         
         return redirect('core:checkout')
-        
+    
+    # Updates order item to ordered so it know the items that has been paid for
     order_items.update(ordered=True)
     for item in order_items:
         item.save()
@@ -296,6 +217,7 @@ def payment(request,pk):
 
     all_orders = order.items.all()
 
+    #Reduce item quantity 
     for order_item in all_orders:
         item = order_item.item
         item.quantity = item.quantity - order_item.quantity
