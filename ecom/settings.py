@@ -149,6 +149,3 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 
 FORM_RENDERER = 'django.forms.renderers.DjangoTemplates'
 
-
-# Activate Django-Heroku.
-django_heroku.settings(locals())
