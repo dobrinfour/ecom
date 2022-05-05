@@ -1,0 +1,60 @@
+{% extends 'core/index.html'%}
+
+{% load static %}
+
+{% block content%}
+
+<div class="container">
+
+  <br> <br> <br> <br>
+  <div class="row">
+    <aside class="col-lg-6">
+      <article class="gallery-wrap">
+        <div class="img-big-wrap img-thumbnail">
+          <a href="#">
+            <img
+              height="520"
+              src="{{item.image.url}}"
+            />
+          </a>
+        </div>
+  
+      </article>
+      <!-- gallery-wrap .end// -->
+    </aside>
+    <div class="col-lg-6">
+      <article class="ps-lg-3">
+        <h4 class="title text-dark">
+          {{item.title}}
+        </h4>
+      
+        <!-- rating-wrap.// -->
+        <div class="mb-3">
+          <var class="price h5">£{{item.price}}</var>
+          
+        </div>
+        <p>
+          {{item.description}}
+        </p>
+        
+        <br> <br> <br> <br><br> <br> <br> <br>
+        <hr />
+        
+        
+        <!-- row.// -->
+        <a href="{% url "core:add-to-cart" pk=item.id %}" class="btn btn-outline-success "> Add to cart </a>
+
+        {% if item.id in order_items %}
+        <a href="{% url "core:remove-from-cart" pk=item.id %}" class="btn btn-outline-danger "> Remove </a>
+        {% endif %}
+      </article>
+      <!-- product-info-aside .// -->
+    </div>
+    <!-- col.// -->
+  </div>
+  <!-- row.// -->
+
+  <br><br><br><br>
+</div>
+
+{% endblock content%}

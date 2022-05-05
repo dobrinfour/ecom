@@ -1,0 +1,176 @@
+{% extends 'core/index.html'%}
+
+
+{% load static %}
+{% load humanize %}
+
+{% block content%}
+<!-- ================ SECTION INTRO ================ -->
+<section class="section-intro bg-primary padding-y-lg">
+	<div class="container">
+
+	  <article class="my-5">
+	    <h1 class="display-4 text-white"> Best products & <br> brands in our store  </h1>
+	    <p class="lead text-white">Trendy Products, Factory Prices, Excellent Service</p>
+	    <a href="#" class="btn btn-warning"> Purchase now</a> 
+	    <a href="#" class="btn btn-light"> Learn more </a>
+	  </article>
+
+	</div> <!-- container end.// -->
+</section>
+<!-- ================ SECTION INTRO END.// ================ -->
+
+<!-- ================ SECTION PRODUCTS ================ -->
+<section class="padding-y">
+<div class="container">
+
+	<header class="section-heading">
+		<h3 class="section-title">All products</h3>
+	</header> 
+
+	<div class="row">
+
+		{% for item in items %}
+		<div class="col-lg-3 col-md-6 col-sm-6">
+			<figure class="card card-product-grid">
+				<div class="img-wrap"> 
+					<img src="{{item.image.url}}"> 
+				</div>
+				<figcaption class="info-wrap border-top">
+					<div class="price-wrap">
+						<span class="price">£{{item.price}}</span>
+					</div> <!-- price-wrap.// -->
+					<p class="title mb-2">{{item.title}}</p>
+					
+					<a href="{% url "core:add-to-cart" pk=item.id %}" class="btn btn-primary">Add to cart</a>
+					<a href="{% url "core:product_details" pk=item.id %}" class="btn btn-outline-secondary">View details</a>
+				</figcaption>
+			</figure>
+		</div> <!-- col end.// -->
+
+		{% endfor %}
+		<div class="col-md-6">
+			<nav aria-label="Page navigation example">
+				{% if items.has_other_pages %}
+				<ul class="pagination">
+				  {% if items.has_previous %}
+				  <li class="page-item"><a class="page-link" href="?page={{ items.previous_page_number }}">Previous</a></li>
+				  {% endif %}
+		  
+				  {% for i in items.paginator.page_range %}
+				  {% if items.number == i %}
+				  <li class="page-item"><a class="page-link" href="#">{{ i }}</a></li>
+				  {% else %}
+				  <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+		  
+				  {% endif %}
+				  {% endfor %}
+		  
+				  {% if items.has_next %}
+				  
+				  <li class="page-item"><a class="page-link" href="?page={{ items.next_page_number }}">Next</a></li>
+				  {% endif %}
+				</ul>
+				{% endif %}
+			  </nav>
+		</div>
+	</div> <!-- row end.// -->
+  
+
+</div> <!-- container end.// -->
+</section>
+<!-- ================ SECTION PRODUCTS END.// ================ -->
+
+<!-- ================ SECTION FEATURE ================ -->
+<section class="bg-light padding-y">
+<div class="container">
+
+	<header class="section-heading mt-2 mb-5">
+		<h3 class="section-title">Why choose us</h3>
+	</header> 
+
+	<div class="row mb-4">
+		<div class="col-lg-4 col-md-6">	
+			<figure class="itemside align-items-center mb-4">
+				<div class="aside">
+					<span class="rounded-circle shadow-sm text-primary icon-lg bg-white">
+						<i class="fa fa-money-bill"></i>
+					</span>
+				</div>
+				<figcaption class="info">
+					<h6 class="title">Reasonable prices</h6>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do eiusmor </p>
+				</figcaption>
+			</figure> <!-- itemside // -->
+		</div><!-- col // -->
+		<div class="col-lg-4 col-md-6">
+			<figure class="itemside align-items-center  mb-4">
+				<div class="aside">
+					<span class="rounded-circle shadow-sm text-primary icon-lg bg-white">
+						<i class="fa fa-star"></i>
+					</span>
+				</div>
+				<figcaption class="info">
+					<h6 class="title">Best quality</h6>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do eiusmor </p>
+				</figcaption>
+			</figure> <!-- itemside // -->
+		</div><!-- col // -->
+	    <div class="col-lg-4 col-md-6">
+			<figure class="itemside align-items-center  mb-4">
+				<div class="aside">
+					<span class="rounded-circle shadow-sm text-primary icon-lg bg-white">
+						<i class="fa fa-plane"></i>
+					</span>
+				</div>
+				<figcaption class="info">
+					<h6 class="title">Worldwide shipping</h6>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do eiusmor </p>
+				</figcaption>
+			</figure> <!-- itemside // -->
+		</div> <!-- col // -->
+		<div class="col-lg-4 col-md-6">	
+			<figure class="itemside align-items-center  mb-4">
+				<div class="aside">
+					<span class="rounded-circle shadow-sm text-primary icon-lg bg-white">
+						<i class="fa fa-users"></i>
+					</span>
+				</div>
+				<figcaption class="info">
+					<h6 class="title">Customer satisfaction</h6>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do eiusmor </p>
+				</figcaption>
+			</figure> <!-- itemside // -->
+		</div><!-- col // -->
+		<div class="col-lg-4 col-md-6">
+			<figure class="itemside align-items-center mb-4">
+				<div class="aside">
+					<span class="rounded-circle shadow-sm text-primary icon-lg bg-white">
+						<i class="fa fa-thumbs-up"></i>
+					</span>
+				</div>
+				<figcaption class="info">
+					<h6 class="title">Happy customers</h6>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do eiusmor </p>
+				</figcaption>
+			</figure> <!-- itemside // -->
+		</div><!-- col // -->
+	    <div class="col-lg-4 col-md-6">
+			<figure class="itemside align-items-center mb-4">
+				<div class="aside">
+					<span class="rounded-circle shadow-sm text-primary icon-lg bg-white">
+						<i class="fa fa-box"></i>
+					</span>
+				</div>
+				<figcaption class="info">
+					<h6 class="title">Thousand items</h6>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do eiusmor </p>
+				</figcaption>
+			</figure> <!-- itemside // -->
+		</div> <!-- col // -->
+	</div>
+</div> <!-- container end.// -->
+</section>
+<!-- ================ SECTION FEATURE END.// ================ -->
+
+{% endblock content%}

@@ -1,0 +1,55 @@
+{% extends 'index.html'%}
+{% load static%}
+
+{% block content%}
+
+<div class="row">
+
+  <div class="col-1">
+
+  </div>
+
+  <div class="col-md-10 col-sm-12  ">
+    <a href="{%url 'showroom_admin:add_category'%}"> <button type="button" class="btn btn-outline-success" data-toggle="tooltip" title="new item">Add Category <i class="fa fa-plus-square"></i></button></a>
+     <div class="x_panel">
+       <div class="x_title">
+         <h2>Category list<br></h2>
+         <div class="clearfix"></div>
+       </div>
+       <div class="x_content">
+         <table class="table table-striped">
+           <thead>
+             <tr>
+               <th>S/N</th>
+               <th>Category</th>
+               <th>Delete</th>
+             </tr>
+           </thead>
+           <tbody>
+             {% for item in category %}
+             <tr>
+               <th scope="row">{{forloop.counter}}</th>
+               <td>{{item.category}}</td>
+
+                <td> <a href="{%url "showroom_admin:delete_category" pk=item.id%}"><button type="button" class="btn btn-outline-danger" data-toggle="tooltip" title="View details">Delete <i class="fa fa-trash-o"></i></button></a> </td>
+             </tr>
+
+             {% endfor %}
+
+
+           </tbody>
+
+         </table>
+
+
+
+       </div>
+     </div>
+   </div>
+   <div class="col-1">
+
+   </div>
+</div>
+
+
+{% endblock content%}

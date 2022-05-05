@@ -1,0 +1,27 @@
+
+{% load static %}
+<div class="offcanvas-body">
+      
+  {% for order_item in order_items.all %}
+  <figure class="itemside mb-4">
+    <div class="aside">
+      <img src="{{order_item.item.image.url}}" class="border img-sm rounded">
+    </div>
+    <figcaption class="info">
+      <a href="{% url 'core:remove-from-cart' order_item.item.pk %}" class="btn btn-icon btn-light float-end"><i class="fa fa-trash"></i></a>
+      <p> {{ order_item.item.title }}</p>
+      <span class="text-muted">{{order_item.quantity}} x £{{ order_item.item.price }}</span> <br>
+      <strong class="price"> {{order_item.get_total_item_price}} </strong>
+    </figcaption>
+  </figure>
+  {% endfor %}
+
+  <hr>
+ 
+  <p class="mb-3 text-center"> Subtotal:  <strong class="text-danger">£{{ order.get_total }}</strong>  </p>
+  <div class="mb-3">
+    <a href="{%url 'core:checkout'%}" class="btn w-100 btn-success"> Checkout </a>
+  </div>
+  <p class="mb-3 text-center"> <img src="{% static "images/misc/payments.png" %}" height="22">  </p>
+
+</div> <!-- offcanvas-body -->

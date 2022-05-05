@@ -1,0 +1,264 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from colorlib.com/polygon/gentelella/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 10 May 2020 02:52:16 GMT -->
+<!-- Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="{% static "images/favicon.ico"%}" type="image/ico" />
+  <title>Admin Panel | </title>
+
+  <link href="{%static "vendors/bootstrap/dist/css/bootstrap.min.css"%}" rel="stylesheet">
+
+  <link href="{% static "vendors/font-awesome/css/font-awesome.min.css"%}" rel="stylesheet">
+
+  <link href="{% static "vendors/nprogress/nprogress.css"%}" rel="stylesheet">
+
+  <link href="{% static "vendors/iCheck/skins/flat/green.css"%}" rel="stylesheet">
+
+  <link href="../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+  <link href="../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+  <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+  <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+  <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+
+
+  <link href="{%static "vendors/bootstrap/dist/css/bootstrap.min.css"%}" rel="stylesheet">
+
+  <link href="{% static "vendors/font-awesome/css/font-awesome.min.css"%}" rel="stylesheet">
+
+  <link href="{%static "vendors/nprogress/nprogress.css"%}" rel="stylesheet">
+
+  <link href="{% static "vendors/iCheck/skins/flat/green.css"%}" rel="stylesheet">
+
+  <link href="{% static "vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css"%}" rel="stylesheet">
+
+  <link href="{% static "vendors/jqvmap/dist/jqvmap.min.css" %}" rel="stylesheet" />
+
+  <link href="{% static "vendors/bootstrap-daterangepicker/daterangepicker.css"%}" rel="stylesheet">
+
+  <link href="{% static "vendors/datatables.net-bs/css/dataTables.bootstrap.min.css"%}" rel="stylesheet">
+  <link href="{% static "vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css"%}" rel="stylesheet">
+  <link href="{% static "vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css"%}" rel="stylesheet">
+  <link href="{% static "vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css"%}" rel="stylesheet">
+  <link href="{% static "vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css"%}" rel="stylesheet">
+
+  <link href="{% static "build/css/custom.min.css"%}" rel="stylesheet">
+</head>
+
+<body class="nav-md">
+  <div class="container body">
+    <div class="main_container">
+      <div class="col-md-3 left_col">
+        <div class="left_col scroll-view">
+          <div class="navbar nav_title" style="border: 0;">
+            <a href="{% url "showroom_admin:dashboard"%}" class="site_title"><i class="fa fa-paw"></i> <span>Admin Panel</span></a>
+          </div>
+          <div class="clearfix"></div>
+
+          <div class="profile clearfix">
+            <div class="profile_pic">
+              <img src="{% static "images/home.jpg"%}" alt="..." class="img-circle profile_img">
+            </div>
+            <div class="profile_info">
+              <span>Welcome,</span>
+              <h2>Admin</h2>
+            </div>
+          </div>
+
+          <br />
+
+          <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+            <div class="menu_section">
+              <h3>Menu</h3>
+              <ul class="nav side-menu">
+                <li><a href="{% url "showroom_admin:dashboard"%}"><i class="fa fa-home"></i> Home </a>
+
+                </li>
+                <li><a><i class="fa fa-cubes"></i> Products <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu">
+                    <li><a href="{% url "showroom_admin:productlist"%}">My Products</a></li>
+                    <li><a href="{% url "showroom_admin:category_list" %}">Products Category</a></li>
+                    
+            
+                  </ul>
+                </li>
+                <li><a><i class="fa fa-shopping-cart"></i>Orders<span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu">
+                    <li><a href="{%url "showroom_admin:pending_list"%}">Pending Orders</a></li>
+                    <li><a href="{%url "showroom_admin:delivered_list"%}">Delivered Orders</a></li>
+
+                  </ul>
+                </li>
+                <!-- <li><a><i class="fa fa-group"></i> Clients <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu">
+                    <li><a href="#">clients list</a></li>
+
+                  </ul>
+                </li> -->
+
+
+
+              </ul>
+            </div>
+
+          </div>
+
+          <div class="sidebar-footer hidden-small">
+            <!-- <a data-toggle="tooltip" data-placement="top" title="Settings">
+              <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+            </a>
+            <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+              <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+            </a>
+            <a data-toggle="tooltip" data-placement="top" title="Lock">
+              <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+            </a> -->
+            <a data-toggle="tooltip" data-placement="top" title="Logout" href="{% url "logout"%}">
+              <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="top_nav">
+        <div class="nav_menu">
+          <div class="nav toggle">
+            <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+          </div>
+          <nav class="nav navbar-nav">
+            <ul class=" navbar-right">
+              <li class="nav-item dropdown open" style="padding-left: 15px;">
+                <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
+                  <img src="{% static "images/home.jpg"%}" alt="">Admin
+                </a>
+                <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
+                  <!-- <a class="dropdown-item" href="javascript:;"> Profile</a>
+                  <a class="dropdown-item" href="javascript:;">
+
+                    <span>Settings</span>
+                  </a> -->
+                  <!-- <a class="dropdown-item" href="javascript:;">Help</a> -->
+                  <a class="dropdown-item" href="{% url "logout"%}"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                    <a class="dropdown-item" href="{% url "password_change2"%}"><i class="fa fa-sign-out pull-left"></i>Change Password</a>
+                </div>
+              </li>
+
+            </ul>
+          </nav>
+        </div>
+      </div>
+      {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+
+        <div class="alert alert-success">
+          <a class="close" href="#" data-dismiss="alert">×</a>
+
+          {{ message }}
+
+        </div>
+        {% endfor %}
+      </ul>
+      {% endif %}
+
+      <div class="right_col" role="main">
+        {% block breadcrumb %}
+        {% endblock %}
+
+        {% block content%}
+
+        {% endblock content%}
+        <br />
+
+        <!-- <footer>
+          <div class="pull-right">
+            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com/">Colorlib</a>
+          </div>
+          <div class="clearfix"></div>
+        </footer> -->
+
+      </div>
+    </div>
+
+
+    <script src="{% static "vendors/jquery/dist/jquery.min.js"%}" type="b6da29b5db9baafcda6e7551-text/javascript"></script>
+
+    <script src="{% static "vendors/bootstrap/dist/js/bootstrap.bundle.min.js"%}" type="b6da29b5db9baafcda6e7551-text/javascript"></script>
+
+    <script src="{% static "vendors/fastclick/lib/fastclick.js" %}" type="b6da29b5db9baafcda6e7551-text/javascript"></script>
+
+    <script src="{% static "vendors/nprogress/nprogress.js"%}" type="b6da29b5db9baafcda6e7551-text/javascript"></script>
+
+    <script src="{% static "vendors/Chart.js/dist/Chart.min.js"%}" type="b6da29b5db9baafcda6e7551-text/javascript"></script>
+
+    <script src="{% static "vendors/gauge.js/dist/gauge.min.js"%}" type="b6da29b5db9baafcda6e7551-text/javascript"></script>
+
+    <script src="{% static "vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"%}" type="b6da29b5db9baafcda6e7551-text/javascript"></script>
+
+    <script src="{% static "vendors/iCheck/icheck.min.js"%}" type="b6da29b5db9baafcda6e7551-text/javascript"></script>
+
+    <script src="{%% static "vendors/skycons/skycons.js"}" type="b6da29b5db9baafcda6e7551-text/javascript"></script>
+
+    <script src="{% static "vendors/Flot/jquery.flot.js"%}" type="b6da29b5db9baafcda6e7551-text/javascript"></script>
+    <script src="{% static "vendors/Flot/jquery.flot.pie.js"%}" type="b6da29b5db9baafcda6e7551-text/javascript"></script>
+    <script src="{% static "vendors/Flot/jquery.flot.time.js"%}" type="b6da29b5db9baafcda6e7551-text/javascript"></script>
+    <script src="{% static "vendors/Flot/jquery.flot.stack.js"%}" type="b6da29b5db9baafcda6e7551-text/javascript"></script>
+    <script src="{% static "vendors/Flot/jquery.flot.resize.js"%}" type="b6da29b5db9baafcda6e7551-text/javascript"></script>
+
+    <script src="{% static "vendors/flot.orderbars/js/jquery.flot.orderBars.js"%}" type="b6da29b5db9baafcda6e7551-text/javascript"></script>
+    <script src="{% static "vendors/flot-spline/js/jquery.flot.spline.min.js"%}" type="b6da29b5db9baafcda6e7551-text/javascript"></script>
+    <script src="{% static "vendors/flot.curvedlines/curvedLines.js"%}" type="b6da29b5db9baafcda6e7551-text/javascript"></script>
+
+    <script src="{%static "vendors/DateJS/build/date.js"%}" type="b6da29b5db9baafcda6e7551-text/javascript"></script>
+
+    <script src="{% static "vendors/jqvmap/dist/jquery.vmap.js"%}" type="b6da29b5db9baafcda6e7551-text/javascript"></script>
+    <script src="{% static "vendors/jqvmap/dist/maps/jquery.vmap.world.js"%}" type="b6da29b5db9baafcda6e7551-text/javascript"></script>
+    <script src="{% static "vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"%}" type="b6da29b5db9baafcda6e7551-text/javascript"></script>
+
+    <script src="{% static "vendors/moment/min/moment.min.js"%}" type="b6da29b5db9baafcda6e7551-text/javascript"></script>
+    <script src="{% static "vendors/bootstrap-daterangepicker/daterangepicker.js"%}" type="b6da29b5db9baafcda6e7551-text/javascript"></script>
+
+    <!-- <script data-cfasync="false" src="{% static "cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"%}"></script>
+    <script src="{% static "vendors/jquery/dist/jquery.min.js"%}" type="71c216a69f0b64b7c49284ea-text/javascript"></script>
+
+    <script src="{% static "vendors/bootstrap/dist/js/bootstrap.bundle.min.js"%}" type="71c216a69f0b64b7c49284ea-text/javascript"></script>
+
+    <script src="{% static "vendors/fastclick/lib/fastclick.js"%}" type="71c216a69f0b64b7c49284ea-text/javascript"></script>
+
+    <script src="{% static "vendors/nprogress/nprogress.js"%}" type="71c216a69f0b64b7c49284ea-text/javascript"></script>
+
+    <script src="{% static "vendors/iCheck/icheck.min.js"%}" type="71c216a69f0b64b7c49284ea-text/javascript"></script> -->
+
+    <!-- <script src="../vendors/datatables.net/js/jquery.dataTables.min.js" type="71c216a69f0b64b7c49284ea-text/javascript"></script>
+    <script src="../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js" type="71c216a69f0b64b7c49284ea-text/javascript"></script>
+    <script src="../vendors/datatables.net-buttons/js/dataTables.buttons.min.js" type="71c216a69f0b64b7c49284ea-text/javascript"></script>
+    <script src="../vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js" type="71c216a69f0b64b7c49284ea-text/javascript"></script>
+    <script src="../vendors/datatables.net-buttons/js/buttons.flash.min.js" type="71c216a69f0b64b7c49284ea-text/javascript"></script>
+    <script src="../vendors/datatables.net-buttons/js/buttons.html5.min.js" type="71c216a69f0b64b7c49284ea-text/javascript"></script>
+    <script src="../vendors/datatables.net-buttons/js/buttons.print.min.js" type="71c216a69f0b64b7c49284ea-text/javascript"></script>
+    <script src="../vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js" type="71c216a69f0b64b7c49284ea-text/javascript"></script>
+    <script src="../vendors/datatables.net-keytable/js/dataTables.keyTable.min.js" type="71c216a69f0b64b7c49284ea-text/javascript"></script>
+    <script src="../vendors/datatables.net-responsive/js/dataTables.responsive.min.js" type="71c216a69f0b64b7c49284ea-text/javascript"></script>
+    <script src="../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js" type="71c216a69f0b64b7c49284ea-text/javascript"></script>
+    <script src="../vendors/datatables.net-scroller/js/dataTables.scroller.min.js" type="71c216a69f0b64b7c49284ea-text/javascript"></script>
+    <script src="../vendors/jszip/dist/jszip.min.js" type="71c216a69f0b64b7c49284ea-text/javascript"></script>
+    <script src="../vendors/pdfmake/build/pdfmake.min.js" type="71c216a69f0b64b7c49284ea-text/javascript"></script>
+    <script src="../vendors/pdfmake/build/vfs_fonts.js" type="71c216a69f0b64b7c49284ea-text/javascript"></script> -->
+
+    <script src="{% static "build/js/custom.min.js"%}" type="b6da29b5db9baafcda6e7551-text/javascript"></script>
+    <script src="{% static "ajax.cloudflare.com/cdn-cgi/scripts/7089c43e/cloudflare-static/rocket-loader.min.js"%}" data-cf-settings="b6da29b5db9baafcda6e7551-|49" defer=""></script>
+</body>
+
+<!-- Mirrored from colorlib.com/polygon/gentelella/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 10 May 2020 02:52:44 GMT -->
+
+</html>

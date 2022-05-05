@@ -1,0 +1,10 @@
+{% load static %}
+
+
+<select name="cat" class="form-select">
+
+  <option value=""><a href="{% url 'core:store' pk=0 %}">All type</a></option>
+  {% for cat in category %}
+  <option value="{{cat.id}}"><a href="{% url 'core:store' pk=0 %}">{{cat}}</a></option>
+  {% endfor %}
+</select>

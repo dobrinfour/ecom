@@ -1,0 +1,77 @@
+{% extends 'index.html'%}
+{% load static %}
+
+{% block content%}
+
+<div class="row">
+
+  <div class="col-3">
+
+  </div>
+
+  <div class="col-md-6 col-sm-6  ">
+     <div class="x_panel">
+       <div class="x_title">
+         <h1>Order Summary <br></h1>
+
+
+
+
+         
+       </div>
+       <div class="x_content">
+         <table class="table table-striped">
+           <thead>
+             <tr>
+               <th>s/n</th>
+               <th>item</th>
+               <th>quantity</th>
+                <th>Size</th>
+               <th>price</th>
+
+             </tr>
+           </thead>
+           <tbody>
+             {% for item in order.items.all %}
+             <tr>
+               <th scope="row">{{forloop.counter}}</th>
+               <td>{{item}}</td>
+               <td>{{item.quantity}}</td>
+
+               {% if item.size %}
+                <td>{{item.size}}</td>
+               {% else %}
+                <td> None </td>
+               {% endif %}
+               <td>£{{item.get_final_price}}</td>
+
+
+
+
+             </tr>
+
+             {% endfor %}
+
+
+           </tbody>
+
+         </table>
+         <p> Total Amount: £{{order.get_total}}</p>
+         <!-- <p> Shipping fee: N{{address.location.price}}</p> -->
+
+         {% if order.status %}
+          <button type="button" class="btn btn-outline-success disabled" data-toggle="" title="">Delivered <i class="fa
+ fa-check "></i></button>
+         {%else%}
+         <a href="{%url "showroom_admin:send_order" pk=order.id%}"><button type="button" class="btn btn-outline-danger" data-toggle="tooltip" title="Send order">Pending <i class="fa  fa-mail-forward "></i></button></a>
+         {% endif %}
+       </div>
+     </div>
+   </div>
+   <div class="col-3">
+
+   </div>
+</div>
+
+
+{% endblock content%}

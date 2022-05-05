@@ -1,0 +1,67 @@
+{% extends 'core/index.html'%}
+
+
+{% load static %}
+{% load humanize %}
+
+{% block content%}
+
+
+
+<div class="row">
+
+  <div class="col-lg-4 m-auto">
+    <br> <br> <br>
+    <div class="card mt-5">
+      <div class="card-body">
+        <h4 class="mb-4">Sign in</h4>
+        <form method="post" >
+          {% csrf_token%}
+          <div class="mb-3">
+            <label class="form-label">Username</label>
+            <input
+              name="username"
+              class="form-control"
+              placeholder="johndoe"
+              type="text"
+            />
+          </div>
+          <!-- col end.// -->
+          <div class="mb-3">
+            <label class="form-label">Password</label>
+            <a class="float-end" href="#">Forgot?</a>
+            <input
+              name="password"
+              class="form-control"
+              placeholder="******"
+              type="password"
+            />
+          </div>
+          <!-- col end.// -->
+          <div class="mb-3">
+            <label class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+              
+              />
+              <span class="form-check-label"> Remember </span>
+            </label>
+          </div>
+          <button class="btn w-100 btn-primary" type="submit">
+            Sign in
+          </button>
+        </form>
+        <!-- form end.// -->
+        <p class="text-divider my-4">New to shop?</p>
+        <a href="{% url 'register'%}" class="btn w-100 btn-light">Create new accaunt</a>
+      </div>
+      <!-- card-body end.// -->
+    </div>
+    <br> <br> <br>
+  </div>
+
+</div>
+
+{% endblock content%}

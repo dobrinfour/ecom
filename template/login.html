@@ -1,0 +1,99 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from colorlib.com/polygon/gentelella/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 10 May 2020 02:53:28 GMT -->
+<!-- Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> Admin | </title>
+
+  <link href="{% static "vendors/bootstrap/dist/css/bootstrap.min.css"%}" rel="stylesheet">
+
+  <link href="{% static "vendors/font-awesome/css/font-awesome.min.css"%}" rel="stylesheet">
+
+  <link href="{%static "vendors/nprogress/nprogress.css"%}" rel="stylesheet">
+
+  <link href="{% static "vendors/animate.css/animate.min.css" %}" rel="stylesheet">
+
+  <link href="{% static "build/css/custom.min.css" %}" rel="stylesheet">
+</head>
+
+<body class="login">
+  <div>
+    <a class="hiddenanchor" id="signup"></a>
+    <a class="hiddenanchor" id="signin"></a>
+    <div class="login_wrapper">
+      <div class="animate form login_form">
+        <section class="login_content">
+
+          {% if messages %}
+            <ul class="messages">
+              {% for message in messages %}
+
+              <div class="alert alert-success">
+                  <a class="close" href="#" data-dismiss="alert">×</a>
+
+                  {{ message }}
+
+              </div>
+              {% endfor %}
+            </ul>
+          {% endif %}
+          <form method="post" action="{%url "showroom_admin:login"%}">
+
+            {% csrf_token %}
+            <h1>Login Form</h1>
+            <div>
+              <input type="text" name="username"class="form-control" placeholder="Username" required="" />
+            </div>
+            <div>
+              <input type="password" name="password" class="form-control" placeholder="Password" required="" />
+            </div>
+            <div >
+              <input type="submit" name="" class="btn btn-secondary"  value="login">
+            </div>
+            <div>
+              <!-- <a class="btn btn-default submit" href="{%url "showroom_admin:login"%}">Log in</a> -->
+              <a class="reset_pass" href="#">Lost your password?</a>
+            </div>
+            <div class="clearfix"></div>
+
+          </form>
+        </section>
+      </div>
+      <!-- <div id="register" class="animate form registration_form">
+        <section class="login_content">
+          <form>
+            <h1>Create Account</h1>
+            <div>
+              <input type="text" class="form-control" placeholder="Username" required="" />
+            </div>
+            <div>
+              <input type="email" class="form-control" placeholder="Email" required="" />
+            </div>
+            <div>
+              <input type="password" class="form-control" placeholder="Password" required="" />
+            </div>
+            <div>
+              <a class="btn btn-default submit" href="index.html">Submit</a>
+            </div>
+            <div class="clearfix"></div>
+
+          </form>
+        </section>
+      </div> -->
+    </div>
+  </div>
+</body>
+
+<!-- Mirrored from colorlib.com/polygon/gentelella/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 10 May 2020 02:53:29 GMT -->
+
+</html>
