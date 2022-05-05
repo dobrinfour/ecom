@@ -49,3 +49,4 @@ Werkzeug==2.0.3
 whitenoise==6.0.0
 wsproto==1.1.0
 WTForms==3.0.1
+faker
