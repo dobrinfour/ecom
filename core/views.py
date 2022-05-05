@@ -16,7 +16,7 @@ from faker import Faker
 
 # Create your views here.
 
-def faker_data():
+def faker_data(request):
     fake = Faker()
     category = Category.objects.all()
     
@@ -28,6 +28,8 @@ def faker_data():
         
         item = Item(title=fake.name(), image=f'background_pic/{num}.jpg',price=price,category=category[cat],quantity=100,description=fake.text())
         item.save()
+
+    return redirect('core:home')
 
 def home(request):
     items = Item.objects.all()
